@@ -1,0 +1,13 @@
+---
+- name: Undestand variable precedence
+  hosts: node01
+  vars: 
+    fav_distro: "Ubuntu"
+  tasks:
+  - name: Show value of fav_distro
+    debug:
+      msg: Favorite distro is {{ fav_distro}}
+
+# Note: If pass a "--extra-vars" the variable takes precedence 
+# ansible-playbook 10_variable_precedence.yml --extra-vars fav_distro=Centos
+# ansible-playbook 10_variable_precedence.yml -e fav_distro=Centos

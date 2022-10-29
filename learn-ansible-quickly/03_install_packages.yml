@@ -1,0 +1,36 @@
+---
+- name: first play
+  hosts: all
+  tasks: 
+    - name: install tmux
+      package:
+        name: tmux
+        state: present
+      tags: tmux
+
+    - name: create an archive
+      archive: 
+        path: /var/log
+        dest: /tmp/logs.tar.gz
+        format: gz
+
+- name: second play
+  hosts: node2
+  tasks:
+    - name: install git
+      yum:
+        name: git
+        state: present
+      tags: git
+    
+    - name: install unzip
+      yum:
+        name: unzip
+        state: present
+      tags: unzip
+
+    - name: install gunzip
+      yum:
+        name: gunzip
+        state: present
+      tags: gunzip
