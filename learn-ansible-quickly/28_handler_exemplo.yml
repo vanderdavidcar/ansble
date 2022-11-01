@@ -1,0 +1,26 @@
+---
+- name: Simple handler exemples
+  hosts: node01
+  tasks:
+    - name: Create Users
+      user:
+        name: elliot
+        uid: 4325
+        shell: /bin/bash
+      tags: user 
+
+    - name: Create engineers groups
+      group:
+        name: engineers
+      notify: add elliot 
+
+    - name: Another tasks in the play
+      debug:
+        msg: "I'am just another tasks"
+  
+  handlers:
+    - name: Add elliot
+      user:
+        name: elliot
+        groups: engineers
+        append: yes

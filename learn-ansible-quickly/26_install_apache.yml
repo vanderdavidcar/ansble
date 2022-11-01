@@ -9,6 +9,8 @@
           yum: 
             name: httpd
             state: latest
+          tags: httpd
+
         # Start and enable like command "systemctl start httpd && system enable httpd"
         - name: Start and enable
           service: 
