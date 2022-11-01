@@ -1,0 +1,22 @@
+---
+- name: yum update
+  hosts: web
+  vars:
+    service:
+      - nmap
+  
+  tasks:
+
+  - name: Upgrade all packages
+    ansible.builtin.yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+    tags: update
+
+  - name: Install packages
+    ansible.builtin.service:
+      name: "{{ service }}"
+      state: present
+      enabled: yes
+      tags: pkg

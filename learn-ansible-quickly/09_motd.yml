@@ -1,6 +1,7 @@
 ---
 - name: Set modt in all hosts
   hosts: nodes
+  gather_facts: false
   tasks:
     - name: Set motd = value of message variable
       copy:
