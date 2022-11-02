@@ -1,6 +1,6 @@
 ---
 - name: first play
-  hosts: all
+  hosts: node01
   tasks: 
     - name: install tmux
       package:

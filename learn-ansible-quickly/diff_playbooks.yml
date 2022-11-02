@@ -1,0 +1,23 @@
+---
+- name: Diff
+  hosts: localhost
+  gather_facts: yes
+  become: true
+  become_method: sudo
+  tasks:
+   - name: Get ansible date/time facts
+     setup:
+       filter: "ansible_date_time"
+       gather_subset: "!all"
+
+   - name: Store DTG as fact
+     set_fact:
+       DTG: "{{ ansible_date_time.date }}"
+
+   - name: Changes of the USCORE_Switch
+     copy:
+       src: /mnt/c/vanderson/codes/ansible/playbooks/lab/*
+       dest: /mnt/c/vanderson/codes/projetos-git/public/ansible/learn-ansible-quickly/*
+     check_mode: yes
+     diff: yes
+     register: output

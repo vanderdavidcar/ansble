@@ -1,6 +1,6 @@
 ---
 - name: First play
-  hosts: all
+  hosts: nodes
   tasks:
     - name: Create archive bzip2
       file:
@@ -26,6 +26,7 @@
           - tmux
           - gunzip
           - unzip
+          - httpd
         state: absent
       tags: remove
     
