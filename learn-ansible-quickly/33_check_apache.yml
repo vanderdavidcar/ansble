@@ -1,0 +1,17 @@
+---
+- name: Check if apache is working
+  hosts: web
+  vars:
+    webserver_message : "I'm runnning in the finish line"
+  tasks:
+    - name: Start httpd
+      service:
+        name: httpd
+        state: started
+      tags: service
+    
+    - name: Create index.html using Jinja2
+      template: 
+        src: index.j2
+        dest: /var/www/html/index.html
+      tags: file

@@ -1,0 +1,8 @@
+---
+- name: Dynamic Update etc/hosts File
+  hosts: nodes
+  tasks:
+    - name: Update /etc/hosts using jinja2
+      template:
+        src: hosts.j2
+        dest: /etc/hosts

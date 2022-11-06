@@ -1,0 +1,16 @@
+---
+- name:  Change banner motd
+  hosts: nodes
+  tasks:
+    - name: Changing banner motd
+      template: 
+        src: motd.j2
+        dest: /etc/motd
+
+    - name: Execute command on nodes
+      command: cat /etc/motd
+      register: motd
+
+    - name: Show the IP address from nodes
+      debug: 
+        msg: "{{ motd.stdout }}"
