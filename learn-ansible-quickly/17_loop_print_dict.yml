@@ -1,0 +1,13 @@
+---
+- name: Print Dictionary
+  hosts: node01
+  vars:
+    employee: 
+      name: "Roberto da Silva"
+      title: "Penetration Tester"
+      company: "LHC Technologies"
+  tasks:
+    - name: Print Dictionary
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ employee | dict2items }}"

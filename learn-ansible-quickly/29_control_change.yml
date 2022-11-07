@@ -1,0 +1,26 @@
+---
+- name: Control change
+  hosts: node01
+  tasks: 
+    - name: Run the date command
+      command: date
+      notify: handler1
+      register: date
+      #changed_when: false
+
+    - name: Show date
+      debug:
+        msg: "{{ date.stdout_lines }}"
+
+    - name: Run the uptime command
+      command: uptime
+      register: uptime
+    
+    - name: Show me uptime
+      debug: 
+        msg: "{{ uptime.stdout_lines }}" 
+  
+  handlers:
+    - name: handler1
+      debug: 
+        msg: "I can handler dates"

@@ -1,0 +1,11 @@
+---
+- name: Reboot server
+  hosts: node01
+  tasks:
+    - name: Reboot CentOS 7 server
+      reboot: 
+        msg: "Server is rebooting ..."
+      when: 
+        ansible_facts['distribution'] == "CentOS" and
+        ansible_facts['distribution_major_version'] == "7"
+      tags: reboot

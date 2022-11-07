@@ -1,0 +1,40 @@
+---
+- name: First play
+  hosts: nodes
+  tasks:
+    - name: Create archive bzip2
+      file:
+        path: /tmp/bzip2
+        mode: 0664
+        owner: automation
+        state: touch
+      tags: bzip2
+
+    - name: Install nmap
+      ansible.builtin.package:
+        name: 
+          - nmap
+          - ntpdate
+          - mariadb-server
+        state: latest
+      tags: packages
+  
+    - name: Remove packages
+      yum:
+        name:
+          - nmap
+          - tmux
+          - gunzip
+          - unzip
+          - httpd
+        state: absent
+      tags: remove
+    
+    - name: Install nmap packages
+      package:
+        name: 
+          - nmap
+          - tmux
+          - unzip
+        state: present
+      tags: nmap
