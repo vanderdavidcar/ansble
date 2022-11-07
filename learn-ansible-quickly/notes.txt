@@ -1,0 +1,18 @@
+# ansible-vault create, view, rekey (alterar senha do vault)
+ ansible-vault rekey secret.txt 
+ 
+# --ask-vault-pass - Solicita uma senha
+ansible-playbook 37_vault_playbook.yml --ask-vault-pass
+
+# --vault-password-file - Solicita um arquivo que contém a senha criptografada
+ansible-playbook --vault-password-file web-secrets.yml 37_vault_playbook.yml
+
+# Visualiza a senha dentro do arquivo
+ansible-vault view db-secrets.yml 
+
+
+# --vault-id web-secrets.yml@prompt - Exibi um prompt para colocar a senha
+ansible-playbook --vault-id web-secrets.yml@prompt --vault-id db-secrets.yml@prompt 37_vault_playbook.yml 
+
+# Usado para especificar um caminho
+ansible-playbook --vault-id /path-to-web-vault-file --vault-id /path-to-db-vault-file vault-playbook.yml
