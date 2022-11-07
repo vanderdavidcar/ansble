@@ -1,0 +1,16 @@
+---
+- name: Accessing vault in playbook web-servers
+  hosts: web
+  vars_files: web-secrets.yml
+  vars_files: db-secrets.yml
+
+  tasks:  
+    - name: Show secret1 file
+      debug:
+        msg: "{{ secret1 }}"
+      tags: web
+      
+    - name: Show secret2
+      debug:
+        msg: "{{ secret2 }}" 
+      tags: db
