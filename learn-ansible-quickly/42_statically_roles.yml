@@ -1,0 +1,7 @@
+---
+- name: Include roles statically
+  hosts: all
+  tasks:
+    roles:
+      - role1
+      - role2

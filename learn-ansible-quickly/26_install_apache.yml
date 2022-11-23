@@ -1,6 +1,6 @@
 ---
 - name: Install and start apache
-  hosts: web    
+  hosts: webserver
   tasks:
     - name: Install and start apache
       block:
@@ -8,7 +8,7 @@
         - name: Install httpd
           yum: 
             name: httpd
-            state: latest
+            state: absent
           tags: httpd
 
         # Start and enable like command "systemctl start httpd && system enable httpd"

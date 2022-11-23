@@ -1,0 +1,8 @@
+---
+- name: Include roles dinamically
+  hosts: all
+  tasks:
+    name: Import dbserver role
+      include_role:
+        name: db_role
+      when: inventory_hostname in groups['dbservers']

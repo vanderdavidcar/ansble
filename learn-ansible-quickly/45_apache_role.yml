@@ -1,0 +1,6 @@
+---
+- name: Using httpd role
+  hosts: webserver
+  roles: 
+    - role: httpd-role
+      sysadmin: helena@yahoo.com.br

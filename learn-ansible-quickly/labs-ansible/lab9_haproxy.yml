@@ -1,0 +1,11 @@
+---
+- name: Lab 9 solution
+  hosts: proxyserver
+  vars:
+    haproxy_backend_servers: 
+    - name: webserver1
+      address: 200.174.115.92:80
+    - name: webserver2
+      address: 200.174.115.8:80
+  roles:
+    - role: geerlingguy.haproxy
