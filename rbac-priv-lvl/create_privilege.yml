@@ -8,8 +8,10 @@
   - name: "delete users "
     dellos10_config:
       lines:
-        - no username backup.oxidized
-        - no username netbox
+        - no username "{{ item }}"
+    with_item:
+       - backup
+       - netbox
     tags: del_users
 
   - name: "add privilege 7"
