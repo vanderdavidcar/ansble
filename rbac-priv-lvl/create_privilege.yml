@@ -1,0 +1,28 @@
+---
+- hosts: border-leaf
+  connection: local
+  vars_files:
+    - group_vars/vault
+  
+  tasks:
+  - name: "delete users "
+    dellos10_config:
+      lines:
+        - no username backup.oxidized
+        - no username netbox
+    tags: del_users
+
+  - name: "add privilege 7"
+    dellos10_config:
+      lines:
+        - privilege exec priv-lvl 7 show
+        - privilege exec priv-lvl 7 terminal
+    tags: priv
+
+  - name: "create users"
+    dellos10_config:
+      lines:
+       - username netbox password {{ vault_netbox_password }} role netadmin priv-lvl 7
+       - username backup.oxidized password {{ vault_oxidized_password }} role netadmin priv-lvl 7
+      save: yes
+    tags: add_users
