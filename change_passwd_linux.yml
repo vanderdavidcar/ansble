@@ -7,3 +7,24 @@
         name: admin
         update_password: always
         password: "{{ newpassword|password_hash('sha512') }}"
+    tags: change_pwd
+
+    - name: Creating user "{{ uusername }}" with admin access
+      user: 
+        name: {{ uusername }}
+        password: {{ upassword | password_hash('sha512') }}
+        shell: /bin/bash
+        groups: admin append=yes
+      when:  assigned_role  == "yes"
+    tags: gp_admin
+
+    - name: Creating users "{{ uusername }}" without admin access
+      user:
+        name: {{ uusername }}
+        password: {{ upassword | password_hash('sha512') }}
+      when:  assigned_role == "no"
+    tags: ungrouped
+
+    - name: Expiring password for user "{{ uusername }}"
+      shell: chage -d 0 "{{ uusername }}"
+    tags: ex_pwd
